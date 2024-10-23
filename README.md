@@ -68,7 +68,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-public class CoinCollection : MonoBehaviour
+public class touchDetection : MonoBehaviour
 {
     int NumOfCoins;
     int i = 1;
