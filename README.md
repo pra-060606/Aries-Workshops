@@ -59,7 +59,74 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("direction", isFacingRight);
         }
     }
+    ________________________________________________________________________________________
+    3RD WORKSHOP SCRIPTS
+    ________________________________________________________________________________________
+
+    using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+public class CoinCollection : MonoBehaviour
+{
+    int NumOfCoins;
+    int i = 1;
+    public int playerHealth=3 ;
+    public GameObject[] hearts;
+    public TMP_Text CoinNumText;
+
+    private void Start()
+    {
+        CoinNumText.text = "X"+NumOfCoins.ToString();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Coin"))
+        {
+            NumOfCoins += 1;
+            CoinNumText.text="X"+NumOfCoins.ToString();
+            Destroy(collision.gameObject);
+        }
+        if (collision.CompareTag("Spike"))
+        {
+            takeDamage();
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("saw"))
+        {
+            takeDamage();
+        }
+    }
+
+    private void takeDamage()
+    {
+        playerHealth -= 1;
+        hearts[hearts.Length - i].gameObject.SetActive(false);
+        i++;
+        if (playerHealth <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
 }
+---------------------------------------------------------------------------------------
 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
+public class sawRotation : MonoBehaviour
+{
+    [SerializeField] private float speed = 2f;
+    void Update()
+    {
+        transform.Rotate(0, 0, 360 * speed * Time.deltaTime);
+    }
+
+}
+---------------------------------------------------------------------------------------
 
